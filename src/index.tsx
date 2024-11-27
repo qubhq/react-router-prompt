@@ -3,6 +3,7 @@ import { BlockerFunction } from "react-router-dom"
 
 import useConfirm from "./hooks/use-confirm"
 import usePrompt from "./hooks/use-prompt"
+import { DefaultBehaviour } from "./types"
 
 type ReactRouterPromptProps = {
   when: boolean | BlockerFunction
@@ -13,6 +14,7 @@ type ReactRouterPromptProps = {
   }) => React.ReactNode
   beforeCancel?: () => Promise<unknown>
   beforeConfirm?: () => Promise<unknown>
+  defaultBehaviour?: DefaultBehaviour
 }
 
 /**
@@ -38,8 +40,12 @@ function ReactRouterPrompt({
   children,
   beforeCancel,
   beforeConfirm,
+  defaultBehaviour = "reset",
 }: ReactRouterPromptProps) {
-  const { isActive, onConfirm, resetConfirmation } = useConfirm(when)
+  const { isActive, onConfirm, resetConfirmation } = useConfirm(
+    when,
+    defaultBehaviour,
+  )
 
   const onConfirmAction = useCallback(async () => {
     if (beforeConfirm) await beforeConfirm()

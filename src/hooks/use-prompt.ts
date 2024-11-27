@@ -5,6 +5,7 @@ import {
   Blocker,
   BlockerFunction,
 } from "react-router-dom"
+import { DefaultBehaviour } from "../types"
 
 // You can abstract `useBlocker` to use the browser's `window.confirm` dialog to
 // determine whether or not the user should navigate within the current origin.
@@ -17,13 +18,17 @@ import {
 // or the app may stay on the correct page but the browser's history stack gets
 // out of whack. You should test your own implementation thoroughly to make sure
 // the tradeoffs are right for your users.
-function usePrompt(when: boolean | BlockerFunction): Blocker {
+function usePrompt(
+  when: boolean | BlockerFunction,
+  defaultBehaviour: DefaultBehaviour,
+): Blocker {
   const blocker = useBlocker(when)
   useEffect(() => {
     if (blocker.state === "blocked" && !when) {
-      blocker.reset()
+      if (defaultBehaviour === "proceed") blocker.proceed()
+      else blocker.reset()
     }
-  }, [blocker, when])
+  }, [blocker, defaultBehaviour, when])
 
   useBeforeUnload(
     useCallback(

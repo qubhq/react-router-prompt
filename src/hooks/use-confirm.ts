@@ -1,4 +1,5 @@
 import { BlockerFunction } from "react-router-dom"
+import { DefaultBehaviour } from "../types"
 import usePrompt from "./use-prompt"
 
 declare interface InitialStateType {
@@ -7,8 +8,11 @@ declare interface InitialStateType {
   resetConfirmation(): void
 }
 
-const useConfirm = (when: boolean | BlockerFunction): InitialStateType => {
-  const blocker = usePrompt(when)
+const useConfirm = (
+  when: boolean | BlockerFunction,
+  defaultBehaviour: DefaultBehaviour,
+): InitialStateType => {
+  const blocker = usePrompt(when, defaultBehaviour)
 
   const resetConfirmation = () => {
     if (blocker.state === "blocked") blocker.reset()
