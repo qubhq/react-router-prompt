@@ -1,5 +1,5 @@
 import React, { useCallback } from "react"
-import { BlockerFunction } from "react-router-dom"
+import { BlockerFunction, Location } from "react-router"
 
 import useConfirm from "./hooks/use-confirm"
 import usePrompt from "./hooks/use-prompt"
@@ -11,9 +11,10 @@ type ReactRouterPromptProps = {
     isActive: boolean
     onCancel: () => void
     onConfirm: () => void
+    nextLocation?: Location
   }) => React.ReactNode
   beforeCancel?: () => Promise<unknown>
-  beforeConfirm?: () => Promise<unknown>
+  beforeConfirm?: (nextLocation?: Location) => Promise<unknown>
   defaultBehaviour?: DefaultBehaviour
 }
 
@@ -42,7 +43,7 @@ function ReactRouterPrompt({
   beforeConfirm,
   defaultBehaviour = "reset",
 }: ReactRouterPromptProps) {
-  const { isActive, onConfirm, resetConfirmation } = useConfirm(
+  const { isActive, onConfirm, resetConfirmation, nextLocation } = useConfirm(
     when,
     defaultBehaviour,
   )
@@ -64,6 +65,7 @@ function ReactRouterPrompt({
           isActive: true,
           onConfirm: onConfirmAction,
           onCancel: onResetAction,
+          nextLocation: nextLocation || undefined,
         })}
       </>
     )
@@ -71,5 +73,6 @@ function ReactRouterPrompt({
   return null
 }
 
-export default ReactRouterPrompt
 export { useConfirm, usePrompt }
+
+export default ReactRouterPrompt

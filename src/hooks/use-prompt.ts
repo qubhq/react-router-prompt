@@ -4,7 +4,8 @@ import {
   useBlocker,
   Blocker,
   BlockerFunction,
-} from "react-router-dom"
+  Location,
+} from "react-router"
 import { DefaultBehaviour } from "../types"
 
 // You can abstract `useBlocker` to use the browser's `window.confirm` dialog to
@@ -20,22 +21,26 @@ import { DefaultBehaviour } from "../types"
 // the tradeoffs are right for your users.
 function usePrompt(
   when: boolean | BlockerFunction,
-  defaultBehaviour: DefaultBehaviour,
+  onNavigate?: (nextLocation: Location) => void,
+  defaultBehaviour?: DefaultBehaviour,
 ): Blocker {
   const blocker = useBlocker(when)
   useEffect(() => {
+    if (blocker.state === "blocked" && blocker.location && onNavigate) {
+      onNavigate(blocker.location)
+    }
     if (blocker.state === "blocked" && !when) {
       if (defaultBehaviour === "proceed") blocker.proceed()
       else blocker.reset()
     }
-  }, [blocker, defaultBehaviour, when])
+  }, [blocker, defaultBehaviour, when, onNavigate])
 
   useBeforeUnload(
     useCallback(
       (event) => {
         if (
           (typeof when === "boolean" && when === true) ||
-          // @ts-ignore Reload case -- No location present
+          // @ts-expect-error Reload case -- No location present
           (typeof when === "function" && when())
         ) {
           event.preventDefault()
