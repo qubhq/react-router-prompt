@@ -12,7 +12,7 @@ declare interface InitialStateType {
 
 const useConfirm = (
   when: boolean | BlockerFunction,
-  defaultBehaviour: DefaultBehaviour,
+  defaultBehaviour?: DefaultBehaviour,
 ): InitialStateType => {
   const [nextLocation, setNextLocation] = useState<Location | null>(null)
 
