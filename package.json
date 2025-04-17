@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0",
+  "version": "0.8.1",
   "name": "@qubhq/react-router-prompt",
   "description": "React Router Navigation Prompt for v6",
   "type": "module",
@@ -11,6 +11,7 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/react-router-prompt.js",
       "require": "./dist/react-router-prompt.umd.cjs"
     }
