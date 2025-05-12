@@ -30,7 +30,7 @@ function usePrompt(
       onNavigate(blocker.location)
     }
     if (blocker.state === "blocked" && !when) {
-      if (defaultBehaviour === "proceed") blocker.proceed()
+      if (defaultBehaviour === "proceed") setTimeout(blocker.proceed, 0)
       else blocker.reset()
     }
   }, [blocker, defaultBehaviour, when, onNavigate])
