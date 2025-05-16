@@ -2,19 +2,19 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/react-router-prompt">
-    <img alt="npm version" src="https://img.shields.io/npm/v/react-router-prompt.svg">
+    <img alt="npm version" src="https://img.shields.io/npm/v/@qubhq/react-router-prompt.svg">
   </a>
   &nbsp;
   <a href="https://www.npmjs.com/package/react-router-prompt">
-    <img alt="npm weekly downloads" src="https://img.shields.io/npm/dw/react-router-prompt.svg">
+    <img alt="npm weekly downloads" src="https://img.shields.io/npm/dw/@qubhq/react-router-prompt.svg">
   </a>
   &nbsp;
   <a href="https://www.npmjs.com/package/react-router-prompt">
-    <img alt="total downloads" src="https://img.shields.io/npm/dt/react-router-prompt.svg">
+    <img alt="total downloads" src="https://img.shields.io/npm/dt/@qubhq/react-router-prompt.svg">
   </a>
   &nbsp;
   <a href="https://www.npmjs.com/package/react-router-prompt">
-    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/react-router-prompt">
+    <img alt="npm bundle size" src="https://img.shields.io/bundlephobia/minzip/@qubhq/react-router-prompt">
   </a>
 </p>
 
