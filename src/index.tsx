@@ -53,19 +53,16 @@ function ReactRouterPrompt({
     resetConfirmation()
   }, [beforeCancel, resetConfirmation])
 
-  if (isActive) {
-    return (
-      <>
-        {children({
-          isActive: true,
-          onConfirm: onConfirmAction,
-          onCancel: onResetAction,
-          nextLocation: nextLocation || undefined,
-        })}
-      </>
-    )
-  }
-  return null
+  return (
+    <>
+      {children({
+        isActive: isActive,
+        onConfirm: onConfirmAction,
+        onCancel: onResetAction,
+        nextLocation: nextLocation || undefined,
+      })}
+    </>
+  )
 }
 
 export { useConfirm, usePrompt }
